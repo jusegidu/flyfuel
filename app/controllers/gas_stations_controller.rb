@@ -1,2 +1,2 @@
-class GasStationController < ApplicationController
+class GasStationsController < ApplicationController
 end
