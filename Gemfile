@@ -77,3 +77,5 @@ group :test do
   gem "webdrivers"
 end
 gem "cloudinary"
+gem 'money-rails', '~>1.12'
+

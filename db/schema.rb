@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_15_183627) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_15_211746) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -51,11 +51,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_15_183627) do
   end
 
   create_table "gas_station_products", force: :cascade do |t|
-    t.integer "price"
     t.bigint "gas_station_id", null: false
     t.bigint "product_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "price_cents", default: 0, null: false
+    t.string "price_currency", default: "USD", null: false
     t.index ["gas_station_id"], name: "index_gas_station_products_on_gas_station_id"
     t.index ["product_id"], name: "index_gas_station_products_on_product_id"
   end
@@ -78,13 +79,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_15_183627) do
   end
 
   create_table "purchases", force: :cascade do |t|
-    t.integer "amount"
     t.integer "quantity"
     t.integer "status"
     t.bigint "user_id", null: false
     t.bigint "gas_station_product_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "amount_cents", default: 0, null: false
+    t.string "amount_currency", default: "USD", null: false
     t.index ["gas_station_product_id"], name: "index_purchases_on_gas_station_product_id"
     t.index ["user_id"], name: "index_purchases_on_user_id"
   end
