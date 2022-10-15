@@ -22,7 +22,7 @@ class GasStationsController < ApplicationController
     @station.user = current_user
 
     if @station.save!
-      redirect_to station_path(@station), notice: "Gas Station was successfully created."
+      redirect_to gas_stations_path, notice: "Gas Station was successfully created."
     else
       render :new, status: :unprocessable_entity # Indica el error en el formulario y hace un renderizado
     end
@@ -32,7 +32,7 @@ class GasStationsController < ApplicationController
   def update
     set_station
     if @station.update(station_params)
-      redirect_to station_url(@station), notice: "This GasStation was successfully updated."
+      redirect_to gas_station_path(@station), notice: "This Gas Station was successfully updated."
     else
       render :edit, status: :unprocessable_entity # Indica el error en el formulario y hace un renderizado
     end
@@ -54,6 +54,6 @@ class GasStationsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def station_params
-    params.require(:GasStation).permit(:name, :address, :latitud, :longitud)
+    params.require(:gas_station).permit(:name, :address, :latitud, :longitud)
   end
 end

@@ -10,7 +10,7 @@
           <div>
             <h2><%= station.name %></h2>
             <p><%= station.latitud %>, <%= station.longitud %></p>
-            <p><%= link_to 'Ver mas >', station_path(station) %></p>
+            <p><%= link_to 'Ver mas >', gas_station_path(station) %></p>
           </div>
           <h2 class="card-trip-pricing">
             Dirección: <%= station.address %>
@@ -19,5 +19,8 @@
       </div>
     </div>
     <% end %>
+      <a href="#" target="_blank">
+        <%= link_to 'Añadir Estación', new_gas_station_path, class: 'btn btn-primary', style: 'width: 25%'%>
+      </a>
   </div>
 </div>
