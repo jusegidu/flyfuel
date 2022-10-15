@@ -15,6 +15,7 @@
     <%= f.input :fuel,
                 required: true,
                 autofocus: true,
+                collection: [ "Corriente", "Extra", "Diesel"],
                 input_html: { autocomplete: "email" }%>
     <%= f.input :birthday,
                 required: true,

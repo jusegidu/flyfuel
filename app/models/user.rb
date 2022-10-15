@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :purchases
   has_many :gas_stations
   validates :first_name, :last_name, :fuel, presence: true
-  validates :fuel, inclusion: { in: %w(corriente extra diesel) }
+  validates :fuel, inclusion: { in: %w(corriente extra diesel Corriente Extra Diesel) }
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 end
