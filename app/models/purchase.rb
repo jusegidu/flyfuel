@@ -10,11 +10,16 @@ class Purchase < ApplicationRecord
     rejected: 2
   }
   after_initialize :default_amount_currency
+  after_initialize :calculate_amount
 
   private
 
   def default_amount_currency
     self.amount_currency = "COP"
     p "deberían ser pesos"
+  end
+
+  def calculate_amount
+    self.amount = self.quantity * GasStationProduct.find(self.gas_station_product_id).price
   end
 end
