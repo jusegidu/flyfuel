@@ -1,0 +1,169 @@
+
+<!-- <section style="background-color: #eee;">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col">
+        <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+          <ol class="breadcrumb mb-0">
+            <li style="margin-right: 20px"><p>Bienvenido a tu perfil</p></li>
+            <li style="margin-right: 20px"><span>|</span></li>
+            <li class="breadcrumb-item active" aria-current="page"><%= @user.first_name %> <%= @user.last_name %></li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+          <% if @user.photo.attached? %>
+            <img src="<%= cl_image_path @user.photo.key, height: 300, crop: :fill %>" alt="avatar"
+              class="rounded-circle img-fluid" style="height: 60px; width: 60px; border-radius: 50%; object-fit: cover;">
+
+          <% else %>
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+              class="rounded-circle img-fluid" style="width: 150px;">
+          <% end %>
+
+            <h5 class="my-3"><%= @user.first_name %> <%= @user.last_name %></h5>
+            <p class="text-center"><%= link_to "Editar perfil", edit_user_registration_path, class: "text-center" %></p>
+            <p class="text-center"><%= link_to "Eliminar perfil", cancel_user_registration_path %></p>
+            <div class="d-flex justify-content-center mb-2">
+              <button type="button" class="btn btn-outline-primary ms-1">Follow</button>
+              <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+            </div>
+          </div>
+        </div>
+        <div class="card mb-4 mb-lg-0">
+          <div class="card-body p-0">
+            <ul class="list-group list-group-flush rounded-3">
+              <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                  <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">Ganancias / Reserva</h4>
+                  </div>
+                <div class="card-body">
+                  <h1 class="card-title pricing-card-title">$400K<small class="text-muted fw-light">/mes</small></h1>
+                  <ul class="list-unstyled mt-3 mb-4">
+                    <li>10 Bookings en tus coworkings</li>
+                    <li>2 Bookings Activas</li>
+                    <li>3 Propiedades Totales</li>
+                    <li>0 Reservas Realizadas</li>
+                  </ul>
+                  <button type="button" class="w-100 btn btn-lg btn-outline-primary">Ver Detalles</button>
+                </div>
+              </div>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Nombre Completo</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"><%= @user.first_name %> <%= @user.last_name %></p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Email</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"><%= @user.email %></p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Cumpleaños</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"><%= @user.birthday %></p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Dirección</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"><%= @user.address %></p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Combustible</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"><%= @user.fuel %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card mb-4 mb-md-0">
+              <div class="card-body">
+                <p class="mb-4"><span class="text-primary font-italic me-1">Properties</span> Places</p>
+                <% @user.purchases.each do |purchase| %>
+                <div class="card">
+                  <%= link_to  purchase.name, purchase_path(purchase), class:"mb-1 w-100 btn btn-lg btn-outline-primary" %>
+                  <p class="mt-2 mb-1" style="font-size: .77rem; margin-left: 20px">Precio: <%= purchase.price %></p>
+                  <p class="mt-2 mb-1" style="font-size: .77rem; margin-left: 20px">Ciudad: <%= place.city %></p>
+                  <p class="mt-2 mb-1 card-title pricing-card-title" style="margin-left: 20px">Precio: $<%= place.price %><small class="text-muted fw-light"> COP/mes</small></p>
+                </div>
+                <p></p>
+                <% end %>
+                <div class="progress rounded mb-2" style="height: 5px;">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card mb-4 mb-md-0">
+              <div class="card-body">
+                <p class="mb-4"><span class="text-primary font-italic me-1">Bookings</span> Details</p>
+                <% @user.bookings.each do |booking| %>
+                <div class="card">
+                 <div class="card-header">
+                  <p class="mb-1" style="font-size: .77rem;"><%= booking.place.name %>
+                </div>
+                <div class="card-body">
+                  <p class="mb-1" style="font-size: .77rem;">Dirección: <%= booking.place.address %></p>
+                  <p class="mb-1" style="font-size: .77rem; color: green">Fecha de Inicio:</p>
+                  <p class="mb-1" style="font-style: bold;"><%= booking.check_in %></p>
+                  <p class="mb-1" style="font-size: .77rem; color: green">Fecha de Salida:</p>
+                  <p class="mb-1" style="font-style: bold;"><%= booking.check_out %></p>
+                  <ul class="inline-list">
+                    <li class="mt-2 mb-2">
+                      <a href="#" target="_blank">
+                        <%= link_to "Cancelar", booking_path(booking), class: 'btn btn-primary', data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+                      </a>
+                    </li>
+                    <li class="mt-2 mb-2">
+                      <a href="#" target="_blank" class=>
+                        <%= link_to 'Cambiar fechas', edit_place_booking_path(booking.place, booking), class: 'btn btn-primary' %>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <p></p>
+                <% end %>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
