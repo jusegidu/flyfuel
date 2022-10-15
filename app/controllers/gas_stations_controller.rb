@@ -54,6 +54,6 @@ class GasStationsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def station_params
-    params.require(:gas_station).permit(:name, :address, :latitud, :longitud)
+    params.require(:gas_station).permit(:name, :address, :latitud, :longitud, :photo)
   end
 end

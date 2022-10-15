@@ -1,7 +1,9 @@
 <div class=" mx-5 mt-5 mb-5 show-place">
   <h1 strong center><%= @station.name %></h1>
     <div class="mt-5">
-      Foto --------------------------------
+      <% if  @station.photo.attached? %>
+        <%= cl_image_tag @station.photo.key, height: 300, width: 400, crop: :fill %>
+      <% end %>
     </div>
 </div>
 

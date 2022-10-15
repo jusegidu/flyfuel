@@ -6,6 +6,9 @@
     <% @stations.each do |station| %>
     <div class="p-4 col-6 col-md-4 col-sm-12">
       <div class="card-trip">
+        <% if  station.photo.attached? %>
+          <%= cl_image_tag station.photo.key, height: 300, width: 400, crop: :fill %>
+        <% end %>
         <div class="card-trip-infos">
           <div>
             <h2><%= station.name %></h2>
