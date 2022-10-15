@@ -1,0 +1,26 @@
+<h1>Welcome to Fly Fuel</h1>
+
+
+<div class="container text-center">
+  <div class="row">
+    <% @stations.each do |station| %>
+    <div class="p-4 col-6 col-md-4 col-sm-12">
+      <div class="card-trip">
+        <div class="card-trip-infos">
+          <div>
+            <h2><%= station.name %></h2>
+            <p><%= station.latitud %>, <%= station.longitud %></p>
+            <p><%= link_to 'Ver mas >', gas_station_path(station) %></p>
+          </div>
+          <h2 class="card-trip-pricing">
+            Dirección: <%= station.address %>
+          </h2>
+        </div>
+      </div>
+    </div>
+    <% end %>
+      <a href="#" target="_blank">
+        <%= link_to 'Añadir Estación', new_gas_station_path, class: 'btn btn-primary', style: 'width: 25%'%>
+      </a>
+  </div>
+</div>

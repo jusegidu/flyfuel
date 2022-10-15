@@ -5,3 +5,5 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+GasStation.create([{ id: 1, name: "Ayurá", address: "Guayabal con la 80", latitud: '24° N', longitud: '34° S' }])
+puts "Gas Station created"
