@@ -1,11 +1,10 @@
 class GasStationProduct < ApplicationRecord
   belongs_to :gas_station
   belongs_to :product
-  has_many :purchases
+  has_many :purchases, dependent: :destroy
   validates :price_cents, presence: true
   monetize :price_cents
   register_currency :cop
-  
   after_initialize :default_price_currency
 
   private

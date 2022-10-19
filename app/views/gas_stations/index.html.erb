@@ -4,23 +4,33 @@
 <div class="container text-center">
   <div class="row">
     <% @stations.each do |station| %>
-    <div class="p-4 col-6 col-md-4 col-sm-12">
-      <div class="card-trip">
-        <% if  station.photo.attached? %>
-          <%= cl_image_tag station.photo.key, height: 300, width: 400, crop: :fill %>
-        <% end %>
-        <div class="card-trip-infos">
-          <div>
-            <h2><%= station.name %></h2>
-            <p><%= station.latitud %>, <%= station.longitud %></p>
-            <p><%= link_to 'Ver mas >', gas_station_path(station) %></p>
+      <div class="p-4 col-6 col-md-4 col-sm-12">
+        <div class="card-trip">
+          <% if  station.photo.attached? %>
+            <%= cl_image_tag station.photo.key, height: 300, width: 400, crop: :fill %>
+          <% end %>
+          <div class="card-trip-infos">
+            <div>
+              <h2><%= station.name %></h2>
+              <p><%= station.latitude %>, <%= station.longitude %></p>
+              <p><%= link_to 'Ver mas >', gas_station_path(station) %></p>
+            </div>
+            <h2 class="card-trip-pricing">
+              Dirección: <%= station.address %>
+            </h2>
           </div>
-          <h2 class="card-trip-pricing">
-            Dirección: <%= station.address %>
-          </h2>
         </div>
       </div>
-    </div>
+      <div>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal<%=station.id%>">Open modal for @getbootstrap</button>
+        <div class="modal fade" id="exampleModal<%=station.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <%= render "show", station: station%>
+            </div>
+          </div>
+        </div>
+      </div>
     <% end %>
       <a href="#" target="_blank">
         <%= link_to 'Añadir Estación', new_gas_station_path, class: 'btn btn-primary', style: 'width: 25%'%>
