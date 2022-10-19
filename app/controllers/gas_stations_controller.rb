@@ -2,6 +2,15 @@ class GasStationsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show, :index]
   def index
     @stations = GasStation.all
+
+    @markers = @stations.geocoded.map do |station|
+      {
+        lat: station.latitude,
+        lng: station.longitude,
+        info_window: render_to_string(partial: "info_window", locals: {station: station}),
+        image_url: helpers.asset_url("logo.png")
+      }
+    end
   end
 
   def show
