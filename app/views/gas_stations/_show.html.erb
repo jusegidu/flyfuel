@@ -1,35 +1,35 @@
 <div class=" mx-5 mt-5 mb-5 show-place">
-  <h1 strong center><%= @station.name %></h1>
+  <h1 strong center><%= station.name %></h1>
     <div class="mt-5">
-      <% if  @station.photo.attached? %>
-        <%= cl_image_tag @station.photo.key, height: 300, width: 400, crop: :fill %>
+      <% if  station.photo.attached? %>
+        <%= cl_image_tag station.photo.key, height: 300, width: 400, crop: :fill %>
       <% end %>
     </div>
 </div>
 
   <div class="container-booking">
     <blockquote class="blockquote border-start border-5 ps-3 mt-3">
-      <p><%= @station.address %></p>
+      <p><%= station.address %></p>
       <figcaption class="blockquote-footer">
         <cite title="Source Title">Ubicacion</cite>
       </figcaption>
-      <p><%= @station.latitude %>, <%= @station.longitude %></p>
+      <p><%= station.latitude %>, <%= station.longitude %></p>
       <figcaption class="blockquote-footer">
         <cite title="Source Title">Coordenadas</cite>
       </figcaption>
     </blockquote>
 
     <ul class="inline-list">
-      <% if current_user == @station.user %>
+      <% if current_user == station.user %>
         <li>
           <a href="#" target="_blank">
-            <%= link_to 'Editar', edit_gas_station_path, class: 'btn btn-primary' %>
+            <%= link_to 'Editar', edit_gas_station_path(station), class: 'btn btn-primary' %>
           </a>
         </li>
         <li>
           <a href="#" target="_blank">
             <%= link_to "Borrar",
-                  gas_station_path(@station),
+                  gas_station_path(station),
                   data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
           </a>
         </li>

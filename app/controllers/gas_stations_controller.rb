@@ -2,6 +2,15 @@ class GasStationsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show, :index]
   def index
     @stations = GasStation.all
+
+    @markers = @stations.geocoded.map do |station|
+      {
+        lat: station.latitude,
+        lng: station.longitude,
+        info_window: render_to_string(partial: "info_window", locals: {station: station}),
+        image_url: helpers.asset_url("logo.png")
+      }
+    end
   end
 
   def show
@@ -54,6 +63,6 @@ class GasStationsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def station_params
-    params.require(:gas_station).permit(:name, :address, :latitud, :longitud, :photo)
+    params.require(:gas_station).permit(:name, :address, :latitude, :longitude, :photo)
   end
 end

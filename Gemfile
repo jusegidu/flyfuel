@@ -78,4 +78,4 @@ group :test do
 end
 gem "cloudinary"
 gem 'money-rails', '~>1.12'
-
+gem "geocoder"
