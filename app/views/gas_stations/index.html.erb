@@ -12,9 +12,11 @@
           <div class="card-trip-infos">
             <div>
               <h2><%= station.name %></h2>
+              <div class="duration"></div>
               <p><%= station.latitude %>, <%= station.longitude %></p>
               <p><%= link_to 'Ver mas >', gas_station_path(station) %></p>
             </div>
+
             <h2 class="card-trip-pricing">
               Dirección: <%= station.address %>
             </h2>
@@ -37,6 +39,8 @@
       </a>
   </div>
 </div>
+
+
 
 <div style="width: 100%; height: 600px;"
   data-controller="map"

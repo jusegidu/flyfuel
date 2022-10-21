@@ -1,0 +1,11 @@
+<%= form_tag gas_stations_path, class:"", method: :get do %>
+  <%= text_field_tag :query,
+            params[:query],
+            class: "form-control ms-md-2",
+            placeholder: "Find a gas station"
+          %>
+          <%= button_tag type: :submit, name: nil, class: "btn btn-search" do %>
+            <i class="fas fa-search"></i>
+          <% end %>
+
+<% end %>

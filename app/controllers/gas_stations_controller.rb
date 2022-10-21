@@ -1,7 +1,16 @@
 class GasStationsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show, :index]
   def index
-    @stations = GasStation.all
+    @location = params[:query]
+    @test = Geocoder.search(@location)
+    if @location
+      @stations = GasStation.all
+      #  @stations.each do |station|
+      #    getRoute(start, end)
+      # end
+    else
+      @stations = GasStation.all
+    end
 
     @markers = @stations.geocoded.map do |station|
       {
