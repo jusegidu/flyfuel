@@ -20,24 +20,30 @@
     </blockquote>
 
     <ul class="inline-list">
-      <% if current_user == @station.user %>
-        <li>
-          <a href="#" target="_blank">
-            <%= link_to 'Editar', edit_gas_station_path, class: 'btn btn-primary' %>
-          </a>
-        </li>
-        <li>
-          <a href="#" target="_blank">
-            <%= link_to "Borrar",
-                  gas_station_path(@station),
-                  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
-          </a>
-        </li>
+      <% if user_signed_in? %>
+        <% if current_user.permission_level == "admin" %>
+          <% if current_user == @station.user %>
+            <li>
+              <a href="#" target="_blank">
+                <%= link_to 'Editar', edit_gas_station_path, class: 'btn btn-primary' %>
+              </a>
+            </li>
+            <li>
+              <a href="#" target="_blank">
+                <%= link_to "Borrar",
+                      gas_station_path(@station),
+                      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
+              </a>
+            </li>
+          <% end %>
+        <% end %>
+    <% end %>
+
         <li>
           <a href="#" target="_blank">
             <%= link_to 'Volver atrás', gas_stations_path, class: 'btn btn-primary' %>
           </a>
         </li>
 
-      <% end %>
+
     </ul>
