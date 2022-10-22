@@ -39,5 +39,17 @@
           </a>
         </li>
 
+        <div class="container">
+          <div class="row">
+            <div class="col-4">
+              <%= simple_form_for [@gas_station, @gas_station_product] do |f| %>
+                f.association :product
+                f.input :price
+                f.submit
+              <% end %>
+            </div>
+          </div>
+        </div>
+
       <% end %>
     </ul>
