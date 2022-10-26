@@ -20,6 +20,6 @@ class Purchase < ApplicationRecord
   end
 
   def calculate_amount
-    self.amount = self.quantity * GasStationProduct.find(self.gas_station_product_id).price
+    # self.amount = self.quantity * GasStationProduct.find(self.gas_station_product_id).price
   end
 end
