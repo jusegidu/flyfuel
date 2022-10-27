@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   resources :gas_stations do
     resources :gas_station_products, only: [:new, :create, :edit]
   end
+  resources :purchases
 end
