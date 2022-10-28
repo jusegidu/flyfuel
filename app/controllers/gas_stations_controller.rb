@@ -15,6 +15,7 @@ class GasStationsController < ApplicationController
 
   def show
     set_station
+    @gas_station_product = GasStationProduct.new
   end
 
   def new
