@@ -8,18 +8,18 @@ class PurchasesController < ApplicationController
   end
 
   def new
-    # @product = GasStationProduct.find(params[:gas_station_product_id])
+    @product = GasStationProduct.find(purchase_params[:gas_station_product_id])
     @user = current_user
     @purchase = Purchase.new
   end
 
   def edit
     set_purchase
-    @product = GasStationProduct.find(params[:gas_station_product_id])
+    @product = GasStationProduct.find(purchase_params[:gas_station_product_id])
   end
 
   def create
-    @product = GasStationProduct.find(params[:gas_station_product_id])
+    @product = GasStationProduct.find(purchase_params[:gas_station_product_id])
     @purchase = Purchase.new(purchase_params)
     @purchase.gas_station_product = @product
     @purchase.user = current_user
@@ -54,6 +54,6 @@ class PurchasesController < ApplicationController
   end
 
   def purchase_params
-    params.require(:purchase).permit(:quantity)
+    params.require(:purchase).permit(:quantity, :gas_station_product_id)
   end
 end

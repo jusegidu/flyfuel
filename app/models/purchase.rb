@@ -16,10 +16,11 @@ class Purchase < ApplicationRecord
 
   def default_amount_currency
     self.amount_currency = "COP"
-    p "deberían ser pesos"
   end
 
   def calculate_amount
-    # self.amount = self.quantity * GasStationProduct.find(self.gas_station_product_id).price
+    if self.gas_station_product_id
+      self.amount = self.quantity * GasStationProduct.find(self.gas_station_product_id).price
+    end
   end
 end
