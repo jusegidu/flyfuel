@@ -13,12 +13,16 @@
       <figcaption class="blockquote-footer">
         <cite title="Source Title">Ubicacion</cite>
       </figcaption>
-      <p><%= station.latitude %>, <%= station.longitude %></p>
-      <figcaption class="blockquote-footer">
-        <cite title="Source Title">Coordenadas</cite>
-      </figcaption>
     </blockquote>
 
+    <% station.gas_station_products.each do |product| %>
+      <div class="card container">
+        <p><%= product.product.name %>: $<%= product.price %>/gal</p>
+      </div>
+    <% end %>
+
+
+    <%= render "purchases/form", purchase: Purchase.new%>
     <ul class="inline-list">
       <% if current_user == station.user %>
         <li>
@@ -39,7 +43,7 @@
           </a>
         </li>
 
-        
+
 
       <% end %>
     </ul>

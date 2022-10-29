@@ -7,6 +7,8 @@ class GasStationProduct < ApplicationRecord
   register_currency :cop
   after_initialize :default_price_currency
 
+  delegate :name, to: :product
+  
   private
 
   def default_price_currency
