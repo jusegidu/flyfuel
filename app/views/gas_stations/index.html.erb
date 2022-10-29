@@ -1,9 +1,5 @@
 <h1>Welcome to Fly Fuel</h1>
-<!--<div data-controller="map">
-  <div class="latitud" data-map-latitud-value="<%= @test.first.data["lat"] %>"><%= @test.first.data["lat"] %></div>
-  <div class="longitud" data-map-longitud-value="<%= @test.first.data["lon"] %>"><%= @test.first.data["lon"] %></div>
-</div> -->
-<%= console %>
+
 <div class="container text-center">
   <div class="row">
     <% @stations.each_with_index do |station, index| %>
@@ -58,5 +54,4 @@
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
-  data-map-latitud-value="<%= @test.first.data["lat"] %>"
-  data-map-longitud-value="<%= @test.first.data["lon"] %>"></div>
+  ></div>
