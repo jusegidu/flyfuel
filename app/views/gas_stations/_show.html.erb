@@ -22,7 +22,7 @@
     <% end %>
 
 
-    <%= render "purchases/form", purchase: Purchase.new%>
+    <%= render "purchases/form", purchase: Purchase.new, station: station%>
     <ul class="inline-list">
       <% if current_user == station.user %>
         <li>
