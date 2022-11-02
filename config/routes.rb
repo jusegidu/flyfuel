@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'payments/new'
+  get 'payments/create'
+  get 'payments/show'
   devise_for :users
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -11,4 +14,6 @@ Rails.application.routes.draw do
   resources :gas_station_products, except: :create
 
   resources :purchases
+
+  resources :payment
 end

@@ -14,6 +14,9 @@
     <% if user_signed_in? == false %>
     <%= link_to "Login", new_user_session_path, class: "nav-link" %>
     <% end %>
+  </div>
 
+  <div>
+    <%= render "payments/form", payment: Payment.new%>
   </div>
 </div>
