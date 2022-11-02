@@ -3,7 +3,9 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-imputs">
-    <%= f.association :gas_station_product, label_method: :name %>
+    <% products = station.gas_station_products %>
+    <%=  f.association :gas_station_product, collection: products, label_method: :name %>
+    <% # collection: Gas_Station::RATINGS, %>
     <%= f.input :quantity %>
   </div>
 
