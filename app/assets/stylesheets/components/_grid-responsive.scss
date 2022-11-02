@@ -1,0 +1,28 @@
+/*
+  AUTO GRID
+  Set the minimum item size with `--auto-grid-min-size` and you'll
+  get a fully responsive grid with no media queries.
+*/
+.auto-grid {
+  --auto-grid-min-size: 12rem;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+  grid-gap: 1rem;
+}
+
+/* Presentational styles */
+
+#li-cards {
+  padding: 1rem 1rem;
+  text-align: center;
+  font-size: 1.2rem;
+  background: #ffffff;
+  color: #030202;
+  border-style: double;
+}
+
+.container {
+
+  padding: 0%;
+}

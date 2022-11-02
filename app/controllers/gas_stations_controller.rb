@@ -53,7 +53,7 @@ class GasStationsController < ApplicationController
   def destroy
     set_station
     @station.destroy
-    redirect_to root_path, notice: "This Gas station was successfully destroyed."
+    redirect_to gas_stations_path, notice: "This Gas station was successfully destroyed."
   end
 
   private
