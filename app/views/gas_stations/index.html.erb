@@ -1,46 +1,59 @@
-<h1>Welcome to Fly Fuel</h1>
+
+<h1 style="color: blue; text-align: center;">Encuentra tu estación de servicio</h1>
+<div class="container">
+   <div class="row">
+      <div class="col-5" id="cards">
+        <ul class="auto-grid">
+          <% @stations.each do |station| %>
+        <div class="cards">
+          <li class="card" id="li-cards">
+
+            <% if  station.photo.attached? %>
+              <%= cl_image_tag station.photo.key, crop: :fill %>
+            <% end %>
 
 
-<div class="container text-center">
-  <div class="row">
-    <% @stations.each do |station| %>
-      <div class="p-4 col-6 col-md-4 col-sm-12">
-        <div class="card-trip">
-          <% if  station.photo.attached? %>
-            <%= cl_image_tag station.photo.key, height: 300, width: 400, crop: :fill %>
-          <% end %>
-          <div class="card-trip-infos">
-            <div>
-              <h2><%= station.name %></h2>
-              <p><%= station.latitude %>, <%= station.longitude %></p>
+            <div class="card-body">
+              <h2 class="card-title"><%= station.name %></h2>
+              <p class="card-trip-pricing">Dirección: <%= station.address %></p>
+              <button type="button" style="width: 65%;" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal<%=station.id%>">Select Gas Station</button>
               <p><%= link_to 'Ver mas >', gas_station_path(station) %></p>
             </div>
-            <h2 class="card-trip-pricing">
-              Dirección: <%= station.address %>
-            </h2>
-          </div>
+
+              <div class="modal fade" id="exampleModal<%=station.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <%= render "show", station: station%>
+                  </div>
+                </div>
+              </div>
+
+          </li>
+        </div>
+          <% end %>
+        <a href="#" target="_blank" class="">
+          <%= link_to 'Añadir Estación', new_gas_station_path, class: 'btn btn-primary', style: 'width: 100%'%>
+        </a>
+        </ul>
+      </div>
+       <div class="col-7" id="map">
+
+        <div class="col-12" style="width: 100%; height: 1230px;"
+        data-controller="map"
+        data-map-markers-value="<%= @markers.to_json %>"
+        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
         </div>
       </div>
-      <div>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal<%=station.id%>">Open modal for @getbootstrap</button>
-        <div class="modal fade" id="exampleModal<%=station.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <%= render "show", station: station%>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
-      <a href="#" target="_blank">
-        <%= link_to 'Añadir Estación', new_gas_station_path, class: 'btn btn-primary', style: 'width: 25%'%>
-      </a>
-  </div>
+
+
+   </div>
+
 </div>
 
 <div style="width: 100%; height: 600px;"
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+
 
 
