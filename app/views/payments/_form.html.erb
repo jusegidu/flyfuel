@@ -1,0 +1,15 @@
+<%= simple_form_for(Payment.new) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-imputs">
+    <%= f.input :card_number %>
+    <%= f.input :exp_date %>
+    <%= f.input :cvv %>
+  </div>
+
+  <div class="form_actions btn btn-primary">
+    <%= f.button :submit %>
+  </div>
+  <%= link_to 'Volver atrás', root_path %>
+<% end %>

@@ -21,8 +21,11 @@
       </div>
     <% end %>
 
-
-    <%= render "purchases/form", purchase: Purchase.new, station: station%>
+    <% if current_user %>
+      <%= render "purchases/form", purchase: Purchase.new, station: station%>
+    <% else %>
+      <%= link_to "Para realizar la compra debes iniciar sesión", new_user_session_path(continue: gas_stations_path) %>
+    <% end %>
     <ul class="inline-list">
       <% if current_user == station.user %>
         <li>
