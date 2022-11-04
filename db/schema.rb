@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_19_001313) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_04_001840) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -70,6 +70,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_19_001313) do
     t.float "latitude"
     t.float "longitude"
     t.index ["user_id"], name: "index_gas_stations_on_user_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "card_number"
+    t.string "exp_date"
+    t.string "cvv"
   end
 
   create_table "products", force: :cascade do |t|
