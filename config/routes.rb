@@ -15,5 +15,5 @@ Rails.application.routes.draw do
 
   resources :purchases
 
-  resources :payment
+  resources :payments
 end
