@@ -1,24 +1,51 @@
-<div class=" mx-5 mt-5 mb-5 show-place">
-  <h1 strong center><%= station.name %></h1>
-    <div class="mt-5">
-      <% if  station.photo.attached? %>
-        <%= cl_image_tag station.photo.key, height: 300, width: 400, crop: :fill %>
-      <% end %>
-    </div>
+<div class="d-flex mx-3 my-3">
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
+<div class="modal-body">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="d-flex flex-column justify-content-center align-items-center">
 
-  <div class="container-booking">
-    <blockquote class="blockquote border-start border-5 ps-3 mt-3">
-      <p><%= station.address %></p>
-      <figcaption class="blockquote-footer">
-        <cite title="Source Title">Ubicacion</cite>
-      </figcaption>
-    </blockquote>
+        <div class="mt-2">
+          <% if  station.photo.attached? %>
+            <%= cl_image_tag station.photo.key, height: 200, crop: :fill %>
+          <% end %>
+        </div>
 
-    <% station.gas_station_products.each do |product| %>
-      <div class="card container">
-        <p><%= product.product.name %>: $<%= product.price %>/gal</p>
+        <div class="modal-title mt-4">
+          <h2 strong center><%= station.name %></h2>
+        </div>
+
+        <div class="container mx-5">
+          <blockquote class="mt-1">
+            <p><%= station.address %></p>
+            <figcaption class="blockquote-footer">
+              <cite title="Source Title">Direccion</cite>
+            </figcaption>
+          </blockquote>
+          <div class="container" style="border-color: black">
+            <% station.gas_station_products.each do |product| %>
+              <ul class="list-group list-group-horizontal d-flex justify-content-center align-items-center">
+                <li class="list-group-item d-flex align-items-center list-group-item-secondary" style="width: 150px">
+                  <%= product.product.name %>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-end list-group-item-secondary" style="width: 200px">
+                  $<%= product.price %>/gal
+                </li>
+              </ul>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="container">
+          <%= render "purchases/form", purchase: Purchase.new, station: station%>
+        </div>
       </div>
+<<<<<<< HEAD
+    </div>
+  </div>
+</div>
+=======
     <% end %>
 
     <% if current_user %>
@@ -50,3 +77,4 @@
 
       <% end %>
     </ul>
+>>>>>>> master

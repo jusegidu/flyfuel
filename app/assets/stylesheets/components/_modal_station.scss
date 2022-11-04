@@ -1,0 +1,15 @@
+.modal.modal-right .modal-dialog{
+  max-width:650px;min-height:calc(100vh - 0)
+}
+
+.modal.modal-right.show .modal-dialog{
+  transform:translate(0,0)
+}
+
+.modal.modal-right .modal-content{
+  height:calc(100vh - 0);overflow-y:auto
+}
+
+.modal.modal-right .modal-dialog{
+  transform:translate(100%,0);margin:0 0 0 auto
+}

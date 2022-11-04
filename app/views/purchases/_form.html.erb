@@ -2,15 +2,22 @@
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-imputs">
-    <% products = station.gas_station_products %>
-    <%=  f.association :gas_station_product, collection: products, label_method: :name %>
-    <% # collection: Gas_Station::RATINGS, %>
-    <%= f.input :quantity %>
+
+  <div class="form-imputs my-4">
+    <div class="row">
+      <div class="d-flex justify-content-center align-items-center">
+        <div class="d-flex flex-column col-5 me-2">
+          <% products = station.gas_station_products %>
+          <%=  f.association :gas_station_product, collection: products, label_method: :name %>
+        </div>
+        <div class="d-flex flex-column col-3 ms-2">
+          <%= f.input :quantity %>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="form_actions btn btn-primary">
+  <div class="form_actions btn btn-primary mb-4">
     <%= f.button :submit %>
   </div>
-  <%= link_to 'Volver atrás', gas_stations_path %>
 <% end %>
