@@ -1,79 +1,78 @@
-<div class=" mx-5 mt-5 mb-5 show-place">
-  <h1 strong center><%= @station.name %></h1>
-    <div class="mt-5">
+<div class="container">
+  <div class="row">
+    <div class="d-flex flex-column col-6 justify-content-center align-items-center">
       <% if  @station.photo.attached? %>
         <%= cl_image_tag @station.photo.key, height: 300, width: 400, crop: :fill %>
       <% end %>
     </div>
-</div>
 
-  <div class="container-booking">
-    <blockquote class="blockquote border-start border-5 ps-3 mt-3">
-      <p><%= @station.address %></p>
-      <figcaption class="blockquote-footer">
-        <cite title="Source Title">Ubicacion</cite>
-      </figcaption>
-      <p><%= @station.latitude %>, <%= @station.longitude %></p>
-      <figcaption class="blockquote-footer">
-        <cite title="Source Title">Coordenadas</cite>
-      </figcaption>
-    </blockquote>
 
-    <div class="container">
+    <div class="d-flex flex-column col-6 justify-content-center align-items-center">
+      <h1 class="mb-2 text-center text-primary"><%= @station.name %></h1>
+      <div class="container-booking">
+        <blockquote class="blockquote border-start border-5 ps-5 mt-5">
+          <p><%= @station.address %></p>
+          <figcaption class="blockquote-footer">
+            <cite title="Source Title">Ubicacion</cite>
+          </figcaption>
+          <p><%= @station.latitude %>, <%= @station.longitude %></p>
+          <figcaption class="blockquote-footer">
+            <cite title="Source Title">Coordenadas</cite>
+          </figcaption>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="d-flex flex-column col-6 justify-content-center align-items-center">
       <% @station.gas_station_products.each do |product| %>
-      <div class="card">
         <p><%= product.product.name %>: $<%= product.price %>/gal</p>
         <div>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal<%=product.id%>">EDITAR</button>
+          <button type="button" class="btn btn-primary, button" data-bs-toggle="modal" data-bs-target="#exampleModal<%=product.id%>">EDITAR</button>
           <div class="modal fade" id="exampleModal<%=product.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <%= render "gas_station_products/edit", product: product%>
               </div>
             </div>
+            <a href="#" target="_blank">
+              <%= link_to "Borrar", gas_station_product_path(product), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
+            </a>
           </div>
+        <% end %>
         </div>
-        <li>
-          <a href="#" target="_blank">
-            <%= link_to "Borrar",
-                  gas_station_product_path(product),
-                  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
-          </a>
-        </li>
-      </div>
-      <% end %>
+
     </div>
-    <ul class="inline-list">
-      <% if current_user == @station.user %>
-        <li>
-          <a href="#" target="_blank">
-            <%= link_to 'Editar', edit_gas_station_path, class: 'btn btn-primary' %>
-          </a>
-        </li>
-        <li>
-          <a href="#" target="_blank">
-            <%= link_to "Borrar",
-                  gas_station_path(@station),
-                  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
-          </a>
-        </li>
-        <li>
-          <a href="#" target="_blank">
-            <%= link_to 'Volver atrás', gas_stations_path, class: 'btn btn-primary' %>
-          </a>
-        </li>
 
-        <div class="container">
-          <div class="row">
-            <div class="col-4">
-              <%= simple_form_for [@station, @gas_station_product] do |f| %>
-                <%= f.association :product %>
-                <%= f.input :price %>
-                <%= f.submit "Submit product", class: "btn btn-primary" %>
-              <% end %>
-            </div>
-          </div>
-        </div>
+    <div class="row my-3 justify-content-center">
 
-      <% end %>
-    </ul>
+
+      <div class="d-flex col-5 justify-content-center align-items-center">
+        <ul class="inline-list">
+          <% if current_user == @station.user %>
+            <a href="#" target="_blank">
+              <%= link_to 'Editar', edit_gas_station_path, class: 'btn btn-primary button rounded-5 me-3' %>
+            </a>
+            <a href="#" target="_blank">
+              <%= link_to "Borrar", gas_station_path(@station), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},  class: 'btn btn-primary button rounded-5 me-3'%>
+            </a>
+            <a href="#" target="_blank">
+              <%= link_to 'Volver atrás', gas_stations_path %>
+            </a>
+          <% end %>
+        </ul>
+      </div>
+
+      <div class="d-flex col-5 justify-content-center align-items-center">
+        <%= simple_form_for [@station, @gas_station_product] do |f| %>
+          <%= f.association :product %>
+          <%= f.input :price %>
+          <%= f.submit "Cargar producto", class: "btn btn-primary button rounded-5" %>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>
