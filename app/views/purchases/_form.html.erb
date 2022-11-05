@@ -22,7 +22,7 @@
       <%= f.button :submit %>
     <% else %>
     <p>Debe iniciar sesión</p>
-      <%= link_to "Iniciar Sesión", new_user_session_path %>
+      <%= link_to "Iniciar Sesión", new_user_session_path(continue: gas_stations_path) %>
     <% end %>
 
   </div>
