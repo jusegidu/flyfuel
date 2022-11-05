@@ -1,51 +1,81 @@
-<h2>Sign up</h2>
+<div class="container">
+  <div class="row">
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: :false }) do |f| %>
-  <%= f.error_notification %>
+    <div class="d-flex flex-column col-6 justify-content-center align-items-center">
+      <img src="http://res.cloudinary.com/depwpts87/image/upload/v1667664931/k80oupqvr8jp78ymgoxm.jpg" class="card-img-top">
+    </div>
 
-  <div class="form-inputs">
-    <%= f.input :first_name,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" }%>
-    <%= f.input :last_name,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" }%>
-    <%= f.input :fuel,
-                required: true,
-                autofocus: true,
-                collection: [ "Corriente", "Extra", "Diesel"],
-                input_html: { autocomplete: "email" }%>
-    <%= f.input :birthday,
-                required: true,
-                autofocus: true,
-                start_year: 1950,
-                end_year: Time.now.year - 18,
-                input_html: { autocomplete: "email" }%>
-    <%= f.input :address,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" }%>
-    <%= f.input :photo, as: :file,
-                required: true,
-                autofocus: true%>
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" }%>
-    <%= f.input :password,
-                required: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
+    <div class="d-flex flex-column col-6 justify-content-center my-3 px-3">
+      <h2 class="text-primary text-center mb-4">Crea una cuenta</h2>
+
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: :false }) do |f| %>
+        <%= f.error_notification %>
+
+        <div class="form-inputs">
+          <div class="row">
+            <div class="d-flex flex-column col-6">
+              <%= f.input :first_name,
+                          required: true,
+                          autofocus: true,
+                          input_html: { autocomplete: "email" }%>
+            </div>
+            <div class="d-flex flex-column col-6">
+              <%= f.input :last_name,
+                          required: true,
+                          autofocus: true,
+                          input_html: { autocomplete: "email" }%>
+            </div>
+          </div>
+          <%= f.input :birthday,
+                      required: true,
+                      autofocus: true,
+                      start_year: 1950,
+                      end_year: Time.now.year - 18,
+                      input_html: { autocomplete: "email" }%>
+          <div class="row">
+            <div class="d-flex flex-column col-6">
+              <%= f.input :address,
+                          required: true,
+                          autofocus: true,
+                          input_html: { autocomplete: "email" }%>
+              <%= f.input :fuel,
+                          required: true,
+                          autofocus: true,
+                          collection: [ "Corriente", "Extra", "Diesel"],
+                          input_html: { autocomplete: "email" }%>
+            </div>
+          </div>
+          <%= f.input :photo, as: :file,
+                      required: true,
+                      autofocus: true%>
+          <%= f.input :email,
+                      required: true,
+                      autofocus: true,
+                      input_html: { autocomplete: "email" }%>
+          <div class="row">
+            <div class="d-flex flex-column col-6">
+              <%= f.input :password,
+                          required: true,
+                          hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                          input_html: { autocomplete: "new-password" } %>
+            </div>
+            <div class="d-flex flex-column col-6">
+              <%= f.input :password_confirmation,
+                          required: true,
+                          input_html: { autocomplete: "new-password" } %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="d-flex align-items-center">
+            <div class="form-actions p-1 me-3 my-4 btn btn-primary">
+              <%= f.button :submit, "Sign up" %>
+            </div>
+          <% end %>
+              <%= render "devise/shared/links" %>
+          </div>
+        </div>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
