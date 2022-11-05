@@ -1,13 +1,24 @@
-<h1>Detalles de tu compra</h1>
-<div class="container">
-  <p>Estación de servicio: <%= @purchase.gas_station_product.gas_station.name %></p>
-  <p>Dirección: <%= @purchase.gas_station_product.gas_station.address %></p>
-  <p>Combustible: <%= @purchase.gas_station_product.name %></p>
-  <p> Cantidad: <%= @purchase.quantity %> gal</p>
-  <p> Total: $ <%= @purchase.amount %></p>
-  <button type="button" class="btn btn-primary">Pagar</button>
-  <button type="button" class="btn btn-primary">Cancelar compra</button>
-  <button type="button" class="btn btn-primary">Editar compra</button>
+<h1 class="text-primary">Detalles de tu compra</h1>
+<div class="container ">
+  <div class="text-center">
+    <p cl>Estación de servicio: <%= @purchase.gas_station_product.gas_station.name %></p>
+    <p>Dirección: <%= @purchase.gas_station_product.gas_station.address %></p>
+    <p>Combustible: <%= @purchase.gas_station_product.name %></p>
+    <p> Cantidad: <%= @purchase.quantity %> gal</p>
+    <p> Total: $ <%= @purchase.amount %></p>
+
+
+    <li>
+          <a href="#" target="_blank">
+            <%= link_to "Cancelar",
+                  purchase_path(@purchase),
+                  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
+          </a>
+        </li>
+
+
+    <%= link_to "Editar compra", edit_purchase_path(@purchase)%>
+  </div>
 
   <div class="container">
     <% if user_signed_in? == false %>
@@ -15,7 +26,7 @@
     <% end %>
   </div>
 
-  <div>
+  <div class="rounded-5 card m-5 p-5  border-primary ">
     <%= render "payments/form" %>
   </div>
 </div>

@@ -15,7 +15,7 @@ class PurchasesController < ApplicationController
 
   def edit
     set_purchase
-    @product = GasStationProduct.find(purchase_params[:gas_station_product_id])
+    #@product = GasStationProduct.find(purchase_params[:gas_station_product_id])
   end
 
   def create
@@ -44,7 +44,7 @@ class PurchasesController < ApplicationController
   def destroy
     set_purchase
     @purchase.destroy
-    redirect_to purchases_path, status: :see_other, notice: "This Purchase was successfully destroyed."
+    redirect_to gas_stations_path, status: :see_other, notice: "This Purchase was successfully destroyed."
   end
 
   private
