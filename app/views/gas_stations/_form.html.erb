@@ -1,17 +1,21 @@
-<%= simple_form_for(@station) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+<div class="row justify-content-center">
+  <div class="d-flex flex-column col-8 justify-content-center align-items-center">
+    <%= simple_form_for(@station) do |f| %>
+      <%= f.error_notification %>
+      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-imputs">
-    <%= f.input :name %>
-    <%= f.input :address %>
-    <%= f.input :latitude %>
-    <%= f.input :longitude %>
-    <%= f.input :photo, as: :file %>
-  </div>
+      <div class="form-imputs">
+        <%= f.input :name %>
+        <%= f.input :address %>
+        <%= f.input :latitude %>
+        <%= f.input :longitude %>
+        <%= f.input :photo, as: :file %>
+      </div>
 
-  <div class="form_actions btn btn-primary">
-    <%= f.button :submit %>
+      <div class="form_actions btn btn-primary me-3 my-4">
+        <%= f.button :submit %>
+      </div>
+      <%= link_to 'Volver atrás', root_path %>
+    <% end %>
   </div>
-  <%= link_to 'Volver atrás', root_path %>
-<% end %>
+</div>
