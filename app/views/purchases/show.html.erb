@@ -1,32 +1,63 @@
-<h1 class="text-primary">Detalles de tu compra</h1>
-<div class="container ">
-  <div class="text-center">
-    <p class="h5">Estación de servicio: <%= @purchase.gas_station_product.gas_station.name %></p>
-    <p class="h5">Dirección: <%= @purchase.gas_station_product.gas_station.address %></p>
-    <p class="h5">Combustible: <%= @purchase.gas_station_product.name %></p>
-    <p class="h5"> Cantidad: <%= @purchase.quantity %> gal</p>
-    <p class="h5"> Total: $ <%= @purchase.amount %></p>
+<div class="container mt-3 mb-5 py-5">
+  <div class="row justify-content-center">
 
+    <div class="d-flex flex-column col-5 justify-content-center align-items-center">
+      <h1 class="text-primary mb-4">Detalles de tu compra</h1>
+        <div class=" d-flex text-center">
+          <p class="me-1 h5">Estación de servicio:</p>
+          <p class="ms-1"><%= @purchase.gas_station_product.gas_station.name %></p>
+        </div>
+        <div class=" d-flex text-center">
+          <p class="me-1 h5">Dirección:</p>
+          <p class="ms-1"><%= @purchase.gas_station_product.gas_station.address %></p>
+        </div>
+        <div class=" d-flex text-center">
+          <p class="me-1 h5">Combustible:</p>
+          <p class="ms-1"><%= @purchase.gas_station_product.name %></p>
+        </div>
+        <div class=" d-flex text-center">
+          <p class="me-1 h5">Cantidad:</p>
+          <p class="ms-1"><%= @purchase.quantity %> gal</p>
+        </div>
+        <div class=" d-flex text-center">
+          <p class="me-1 h5">Total:</p>
+          <p class="ms-1">$ <%= @purchase.amount %></p>
+        </div>
 
-    <li>
+        <div class=" d-flex text-center">
           <a href="#" target="_blank">
             <%= link_to "Cancelar",
-                  purchase_path(@purchase),
-                  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
+              purchase_path(@purchase),
+              data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+            %>
           </a>
-        </li>
+          <div class="ms-3">
+            <%= link_to "Editar compra", edit_purchase_path(@purchase)%>
+          </div>
+        </div>
 
 
-    <%= link_to "Editar compra", edit_purchase_path(@purchase)%>
-  </div>
+        <div class="container">
+          <% if user_signed_in? == false %>
+          <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+          <% end %>
+        </div>
+    </div>
 
-  <div class="container">
-    <% if user_signed_in? == false %>
-    <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-    <% end %>
-  </div>
+    <div class="d-flex col-6 justify-content-center align-items-center">
+      <div class="rounded-5 card border-primary">
+        <div class="row justify-content-center">
+          <div class="d-flex flex-column col-5 justify-content-center align-items-center">
+            <img src="http://res.cloudinary.com/depwpts87/image/upload/v1667674844/zom0hocy5oyhqfnfznmp.png" class="card-img-top">
+          </div>
 
-  <div class="rounded-5 card m-5 p-5  border-primary ">
-    <%= render "payments/form" %>
+          <div class="d-flex flex-column col-6 justify-content-center align-items-center">
+            <h5 class="text-center text-primary mb-4">Ingresa los datos de tu tarjeta</h5>
+            <%= render "payments/form" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
