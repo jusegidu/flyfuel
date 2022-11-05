@@ -4,12 +4,17 @@
 
   <div class="form-imputs">
     <%= f.input :card_number %>
-    <%= f.input :exp_date %>
-    <%= f.input :cvv %>
+    <div class="row">
+      <div class="d-flex col-6">
+        <%= f.input :exp_date %>
+      </div>
+      <div class="d-flex col-6">
+        <%= f.input :cvv %>
+      </div>
+    </div>
   </div>
 
-  <div class="form_actions btn btn-primary rounded-5">
+  <div class="form_actions btn btn-outline-primary rounded-5 mt-3">
     <%= f.button :submit %>
   </div>
-  <%= link_to 'Volver atrás', root_path %>
 <% end %>
