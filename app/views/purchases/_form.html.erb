@@ -18,6 +18,12 @@
   </div>
 
   <div class="form_actions btn btn-primary mb-4">
-    <%= f.button :submit %>
+    <% if user_signed_in? %>
+      <%= f.button :submit %>
+    <% else %>
+    <p>Debe iniciar sesión</p>
+      <%= link_to "Iniciar Sesión", new_user_session_path %>
+    <% end %>
+
   </div>
 <% end %>
