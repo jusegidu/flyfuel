@@ -17,13 +17,15 @@
     </div>
   </div>
 
-  <div class="form_actions btn btn-primary mb-4">
+
     <% if user_signed_in? %>
+    <div class="form_actions btn btn-primary mb-4">
       <%= f.button :submit %>
+    </div>
     <% else %>
     <p>Debe iniciar sesión</p>
-      <%= link_to "Iniciar Sesión", new_user_session_path(continue: gas_stations_path) %>
+      <%= link_to "Iniciar Sesión", new_user_session_path(continue: gas_stations_path), class: "btn btn-primary" %>
     <% end %>
 
-  </div>
+
 <% end %>
