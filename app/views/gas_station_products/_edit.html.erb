@@ -1,14 +1,26 @@
-<%= simple_form_for(product) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+<div class="modal-body">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="d-flex flex-column justify-content-center align-items-center">
+      <h3 class="text-primary">Edita un producto:</h3>
+        <div class="col-md-6">
+          <img src="http://res.cloudinary.com/depwpts87/image/upload/v1667872328/hadyrvxuyzlmgsit8k4q.png" style="height: 200px">
 
-  <div class="form-imputs">
-    <%= f.association :product %>
-    <%= f.input :price %>
-  </div>
+          <%= simple_form_for(product) do |f| %>
+            <%= f.error_notification %>
+            <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form_actions btn btn-primary">
-    <%= f.button :submit %>
+            <div class="form-imputs">
+              <%= f.association :product, label: "Producto:" %>
+              <%= f.input :price, label: "Precio:" %>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit "Actualizar Producto", class: "form_actions btn btn-primary rounded-5" %>
+          <%= link_to 'Volver atrás', gas_station_path %>
+            <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-  <%= link_to 'Volver atrás', gas_station_path %>
-<% end %>
+</div>
