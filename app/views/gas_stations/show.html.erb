@@ -1,16 +1,17 @@
-<div class="container">
+<div class="container my-5">
   <div class="row">
     <div class="d-flex flex-column col-6 justify-content-center align-items-center">
       <% if  @station.photo.attached? %>
-        <%= cl_image_tag @station.photo.key, height: 300, width: 600, crop: :fill %>
+        <%= cl_image_tag @station.photo.key, height: 300, width: 600, crop: :fill, radius: 20 %>
       <% end %>
     </div>
 
 
     <div class="d-flex flex-column col-6 justify-content-center align-items-center">
-      <h1 class="mb-2 text-center text-primary"><%= @station.name %></h1>
+      <h1 class="text-center text-primary"><%= @station.name %></h1>
+
       <div class="container-booking">
-        <blockquote class="blockquote border-start border-5 ps-5 mt-5">
+        <blockquote class="blockquote border-start border-5 ps-5 my-4">
           <p><%= @station.address %></p>
           <figcaption class="blockquote-footer">
             <cite title="Source Title">Ubicacion</cite>
@@ -20,63 +21,82 @@
             <cite title="Source Title">Coordenadas</cite>
           </figcaption>
         </blockquote>
+
+        <div class="d-flex align-items-center">
+          <ul class="inline-list">
+            <% if current_user == @station.user %>
+              <a href="#" target="_blank">
+                <%= link_to 'Editar', edit_gas_station_path, class: 'btn btn-primary button rounded-5 me-3' %>
+              </a>
+              <a href="#" target="_blank">
+                <%= link_to "Borrar", gas_station_path(@station), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},  class: 'btn btn-primary button rounded-5 me-3'%>
+              </a>
+              <a href="#" target="_blank">
+                <%= link_to 'Volver atrás', gas_stations_path %>
+              </a>
+            <% end %>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
-
 
   <div class="row">
-    <div class="d-flex col-6 justify-content-center align-items-center">
-      <% @station.gas_station_products.each do |product| %>
-        <div class="card px-3 my-3 text-center align-items-center" style="border: 0"><%= product.product.name %>: $<%= product.price %>/gal
+    <div class="d-flex justify-content-center border-top border-2 mt-5">
+      <div class="flex-column col-6 justify-content-center align-items-center">
+        <div class="py-3 my-3">
+          <h4 class="text-primary text-center">Productos de la estacion:</h4>
 
-        <div class="flex">
-          <i type="button" class="fa-solid fa-pen-to-square text-primary" data-bs-toggle="modal" data-bs-target="#exampleModal<%=product.id%>"></i>
-          <%= link_to gas_station_product_path(product), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-          <i type="button" class="fa-solid fa-trash text-primary"></i>
-          <% end %>
-        </div>
-
-          <div class="modal fade" id="exampleModal<%=product.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <%= render "gas_station_products/edit", product: product%>
+          <div class="d-flex justify-content-center">
+            <% @station.gas_station_products.each do |product| %>
+              <div class="card px-3 my-3 text-center align-items-center" style="border: 0"><%= product.product.name %>:
+              <div class="card px-3 my-1 text-center align-items-center" style="border: 0">
+                $<%= product.price %>/gal
               </div>
-            </div>
+
+              <div class="flex">
+                <i type="button" class="fa-solid fa-pen-to-square text-primary" data-bs-toggle="modal" data-bs-target="#exampleModal<%=product.id%>"></i>
+                <%= link_to gas_station_product_path(product), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                <i type="button" class="fa-solid fa-trash text-primary"></i>
+                <% end %>
+              </div>
+
+                <div class="modal fade" id="exampleModal<%=product.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <%= render "gas_station_products/edit", product: product%>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <% end %>
           </div>
         </div>
-        <% end %>
-    </div>
-  </div>
-
-    <div class="row my-3 justify-content-between">
-
-
-      <div class="d-flex col-5 align-items-center">
-        <ul class="inline-list">
-        <h2 class="text-primary">Edit Gas Station</h2>
-          <% if current_user == @station.user %>
-            <a href="#" target="_blank">
-              <%= link_to 'Editar', edit_gas_station_path, class: 'btn btn-primary button rounded-5 me-3' %>
-            </a>
-            <a href="#" target="_blank">
-              <%= link_to "Borrar", gas_station_path(@station), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},  class: 'btn btn-primary button rounded-5 me-3'%>
-            </a>
-            <a href="#" target="_blank">
-              <%= link_to 'Volver atrás', gas_stations_path %>
-            </a>
-          <% end %>
-        </ul>
       </div>
 
-      <div class="d-flex col-5 justify-content-center align-items-center">
-        <%= simple_form_for [@station, @gas_station_product] do |f| %>
-          <%= f.association :product, input_html: {class: "rounded-5"} %>
-          <%= f.input :price, input_html: {class: "rounded-5"} %>
-          <%= f.submit "Cargar producto", class: "btn btn-primary button rounded-5" %>
-        <% end %>
-      </div>
+      <div class="flex-column col-6 justify-content-center align-items-center">
+        <div class="py-3 my-3">
+          <h4 class="mb-4">Agrega un producto nuevo:</h4>
 
+          <div>
+            <%= simple_form_for [@station, @gas_station_product] do |f| %>
+              <div class="row">
+                <div class="d-flex justify-content-around align-items-center">
+                  <div class="col-3">
+                    <%= f.association :product, label: "Producto:", input_html: {class: "rounded-5"} %>
+                  </div>
+                  <div class="col-3">
+                    <%= f.input :price, label: "Precio:", input_html: {class: "rounded-5"} %>
+                  </div>
+                  <div class="col-4 mt-2">
+                    <%= f.submit "Agregar producto", class: "form_actions btn btn-primary rounded-5" %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
