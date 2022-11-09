@@ -28,7 +28,7 @@
               <div>
                 <button type="button" style="width: 100%;" class="btn btn-outline-primary rounded-5" data-bs-toggle="modal" data-bs-target="#exampleModal<%=station.id%>">Ver más</button>
                 <% if user_signed_in? %>
-                  <% if current_user.permission_level == 1 %>
+                  <% if current_user.permission_level == "admin" %>
                     <p class="btn"><%= link_to 'Administrar Estación >', gas_station_path(station) %></p>
                   <% end %>
                 <% end  %>
