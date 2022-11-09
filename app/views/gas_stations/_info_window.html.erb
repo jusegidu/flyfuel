@@ -4,4 +4,7 @@
   <div>
     <%= cl_image_tag station.photo.key, class:"img-thumbnail border-0" %>
   </div>
+  <div class="text-center h5 mt-3">
+    <a type="button" class="text-primary" data-bs-toggle="modal" data-bs-target="#exampleModal<%=station.id%>">Ver más</a>
+  </div>
 </div>

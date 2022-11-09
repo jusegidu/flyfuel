@@ -14,19 +14,25 @@
         <ul class="auto-grid">
           <% @stations.each do |station| %>
         <div class="cards">
-          <li class="card p-0 bg-light" id="li-cards">
+          <li class="rounded-5 card p-0 bg-light" id="li-cards">
 
-            <div class="card p-0">
+            <div class="card p-0 border-0">
             <% if  station.photo.attached? %>
-              <%= cl_image_tag station.photo.key, crop: :fill, height: 200 %>
+              <%= cl_image_tag station.photo.key, crop: :fill, height: 200, radius: 25 %>
             <% end %>
             </div>
 
             <div class="card-body">
               <h3 class="card-title"><%= station.name %></h3>
-              <p class="card-trip-pricing">Dirección: <%= station.address %></p>
-              <button type="button" style="width: 100%;" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal<%=station.id%>">Select Gas Station</button>
-              <p class="btn"><%= link_to 'Ver mas >', gas_station_path(station) %></p>
+              <p class="d-flex card-trip-pricing align-items-center" style="height: 80px">Dirección: <%= station.address %></p>
+              <div>
+                <button type="button" style="width: 100%;" class="btn btn-outline-primary rounded-5" data-bs-toggle="modal" data-bs-target="#exampleModal<%=station.id%>">Ver más</button>
+                <% if user_signed_in? %>
+                  <% if current_user.permission_level == 1 %>
+                    <p class="btn"><%= link_to 'Administrar Estación >', gas_station_path(station) %></p>
+                  <% end %>
+                <% end  %>
+              </div>
             </div>
 
               <div class="modal fade modal-right" id="exampleModal<%=station.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -40,10 +46,18 @@
           </li>
         </div>
           <% end %>
-        <a href="#" target="_blank" class="">
-          <%= link_to 'Añadir Estación', new_gas_station_path, class: 'btn btn-primary', style: 'width: 100%'%>
-        </a>
         </ul>
+
+        <% if user_signed_in? %>
+          <% if current_user.permission_level == 1 %>
+            <div class="text-center py-4">
+              <a href="#" target="_blank" class="">
+                <%= link_to 'Añadir Estación', new_gas_station_path, class: 'btn btn-primary rounded-5 px-4'%>
+              </a>
+            </div>
+          <% end %>
+        <% end  %>
+
       </div>
        <div class="col-5" id="map">
 
