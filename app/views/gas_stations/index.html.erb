@@ -49,7 +49,7 @@
         </ul>
 
         <% if user_signed_in? %>
-          <% if current_user.permission_level == 1 %>
+          <% if current_user.permission_level == "admin" %>
             <div class="text-center py-4">
               <a href="#" target="_blank" class="">
                 <%= link_to 'Añadir Estación', new_gas_station_path, class: 'btn btn-primary rounded-5 px-4'%>
